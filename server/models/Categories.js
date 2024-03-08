@@ -37,6 +37,7 @@ const transactionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  transactions: [transactionSchema],
   // Other fields related to transactions if needed
 });
 
