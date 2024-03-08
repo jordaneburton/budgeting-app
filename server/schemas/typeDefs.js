@@ -3,12 +3,10 @@ const typeDefs = `
     _id: ID
     username: String
     email: String
-    budget: [String]
   }
   type Transaction {
     _id: ID
     amount: Int
-    category: [String]
     description: String
     date: String
   }
@@ -24,9 +22,14 @@ const typeDefs = `
     _id: ID
     name: String
     budgetAmount: Int
-    totalBudget: Int
-    tranactions: [String]
+    totalBudget: ID
+    transactions: [String]
   }
+  type Auth {
+    token: ID
+    user: User
+  }
+
   type Query {
     user(userID: ID): User
     users: [User]
@@ -38,10 +41,16 @@ const typeDefs = `
     categories: [Category]
   }
   type Mutation {
-    addUser(email: String, username: String, password: String, budget: String): User
-    addTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
-    addBudget(userid: ID, name: String, totalAmount: Int, startDate: String, budgetPeriod: String, categories: String): Budget
-    addCategory(budgetid: ID, name: String, budgetAmount: Int, totalBudget: Int, transactions: String): Category
+    addUser(email: String, username: String, password: String): Auth
+
+    addTransaction(categoryid: ID, amount: Int, description: String, date: String): Transaction
+
+
+
+    addBudget(userid: ID, name: String, totalAmount: Int, startDate: String, budgetPeriod: String, categories: [ID]): Budget
+
+    addCategory(budgetid: ID, name: String, budgetAmount: Int, transactions: String): Category
+
     updateUser(UserID: ID, Email: String, Name: String): User
     updateTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
     updateBudget(BudgetID: ID, Amount: Float, StartDate: String, EndDate: String): Budget

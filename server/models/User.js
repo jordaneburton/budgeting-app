@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const { Budget } = require('./Budget');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
@@ -18,7 +19,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    budgets: [budgetSchema],
+    budgets: [{
+      type: Schema.Types.ObjectId,
+      ref: 'TotalBudget'
+    }],
   },
   {
     toJSON: {
