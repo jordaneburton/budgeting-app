@@ -17,7 +17,8 @@ export const ADD_BUDGET = gql`
     addBudget(name: $name) {
       _id
       name
-      amount
+      totalAmount
+      budgetPeriod
       categories
     }
   }
@@ -29,7 +30,8 @@ export const ADD_CATEGORY = gql`
     addCategory(name: $name) {
       _id
       name
-      amount
+      budgetAmount
+      totalBudget
       transactions
     }
   }
@@ -40,8 +42,10 @@ export const ADD_TRANSACTION = gql`
   mutation addTransaction($name: String!) {
     addTransaction(name: $name) {
       _id
-      name
       amount
+      category
+      description
+      date
     }
   }
 `;

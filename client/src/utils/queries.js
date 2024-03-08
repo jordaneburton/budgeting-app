@@ -17,7 +17,8 @@ export const QUERY_BUDGETS = gql`
     budgets {
       _id
       name
-      amount
+      totalAmount
+      budgetPeriod
       categories
     }
   }
@@ -29,7 +30,8 @@ export const QUERY_CATEGORIES = gql`
     categories {
       _id
       name
-      amount
+      budgetAmount
+      totalBudget
       transactions
     }
   }
@@ -40,8 +42,10 @@ export const QUERY_TRANSACTIONS = gql`
   query allTransactions {
     transactions {
       _id
-      name
       amount
+      category
+      description
+      date
     }
   }
 `;
