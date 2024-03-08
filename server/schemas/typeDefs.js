@@ -1,71 +1,56 @@
 const typeDefs = `
   type User {
-    UserID: ID!
-    Email: String!
-    Password: String!
-    Name: String!
-    CreationDate: String!
-    Accounts: [Account]!
+    _id: ID
+    username: String
+    email: String
+    budget: [String]
   }
-
-  type Account {
-    AccountID: ID!
-    UserID: ID!
-    AccountName: String!
-    AccountType: String!
-    Balance: Float!
-    Transactions: [Transaction]!
-  }
-
   type Transaction {
-    TransactionID: ID!
-    AccountID: ID!
-    CategoryID: ID!
-    Amount: Float!
-    Type: String!
-    Description: String
-    Date: String!
+    _id: ID
+    amount: Int
+    category: [String]
+    description: String
+    date: String
   }
-
   type Budget {
-    BudgetID: ID!
-    UserID: ID!
-    CategoryID: ID!
-    Amount: Float!
-    StartDate: String!
-    EndDate: String!
+    _id: ID
+    name: String
+    totalAmount: Int
+    StartDate: String
+    budgetPeriod: String
+    categories: [String]
   }
-
   type Category {
-    CategoryID: ID!
-    Name: String!
-    Type: String!
+    _id: ID
+    name: String
+    budgetAmount: Int
+    totalBudget: Int
+    tranactions: [String]
   }
-
   type Query {
-    user(UserID: ID!): User
+    user(userID: ID): User
     users: [User]
-    account(AccountID: ID!): Account
-    accounts: [Account]
-    transaction(TransactionID: ID!): Transaction
+    transaction(TransactionID: ID): Transaction
     transactions: [Transaction]
-    budget(BudgetID: ID!): Budget
+    budget(BudgetID: ID): Budget
     budgets: [Budget]
-    category(CategoryID: ID!): Category
+    category(CategoryID: ID): Category
     categories: [Category]
   }
-
   type Mutation {
-    addUser(Email: String!, Password: String!, Name: String!): User
-    addAccount(UserID: ID!, AccountName: String!, AccountType: String!, Balance: Float!): Account
-    addTransaction(AccountID: ID!, CategoryID: ID!, Amount: Float!, Type: String!, Description: String, Date: String!): Transaction
-    addBudget(UserID: ID!, CategoryID: ID!, Amount: Float!, StartDate: String!, EndDate: String!): Budget
-    addCategory(Name: String!, Type: String!): Category
-    updateUser(UserID: ID!, Email: String, Name: String): User
-    updateAccount(AccountID: ID!, AccountName: String, AccountType: String, Balance: Float): Account
-    updateTransaction(TransactionID: ID!, Amount: Float, Description: String): Transaction
-    updateBudget(BudgetID: ID!, Amount: Float, StartDate: String, EndDate: String): Budget
-    updateCategory(CategoryID: ID!, Name: String, Type: String): Category
+    addUser(email: String, username: String, password: String, budget: String): User
+    addTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
+    addBudget(userid: ID, name: String, totalAmount: Int, startDate: String, budgetPeriod: String, categories: String): Budget
+    addCategory(budgetid: ID, name: String, budgetAmount: Int, totalBudget: Int, transactions: String): Category
+    updateUser(UserID: ID, Email: String, Name: String): User
+    updateTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
+    updateBudget(BudgetID: ID, Amount: Float, StartDate: String, EndDate: String): Budget
+    updateCategory(CategoryID: ID, Name: String, Type: String): Category
+    deleteUser(email: String, username: String, password: String, budget: String): User
+    deleteTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
+    deleteBudget(userid: ID, name: String, totalAmount: Int, startDate: String, budgetPeriod: String, categories: String): Budget
+    deleteCategory(budgetid: ID, name: String, budgetAmount: Int, totalBudget: Int, transactions: String): Category
+
   }
 `;
 module.exports = typeDefs;

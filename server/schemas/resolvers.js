@@ -1,4 +1,4 @@
-const { User, Account, Transaction, Budget, Category } = require('../models');
+const { User, Transaction, Budget, Category } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -21,24 +21,7 @@ const resolvers = {
         throw AuthenticationError;
       }
     },
-    account: async (parent, args) => {
-      try {
-        const account = await Account.findById(args);
-        if (!account) {
-          throw new Error('Account not found');
-        }
-        return account;
-      } catch (error) {
-        throw AuthenticationError;
-      }
-    },
-    accounts: async () => {
-      try {
-        return await Account.find({});
-      } catch (error) {
-        throw AuthenticationError;
-      }
-    },
+   
     transaction: async (parent, args) => {
       try {
         const transaction = await Transaction.findById(args);
@@ -95,7 +78,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    
+
     addUser: async (parent, args) => {
       try {
         const user = await User.create(args);
@@ -107,8 +90,40 @@ const resolvers = {
         throw new Error('Error creating user');
       }
     },
-    
+    addBudget: async (parent, args) => {
+        try {
+          const budget = await Budget.create(args);
+          const token = signToken(budget);
+  
+          return { token, budget };
+  
+        } catch (error) {
+          throw new Error('Error creating budget');
+        }
+      },
+      addCategory: async (parent, args) => {
+        try {
+          const category = await Category.create(args);
+          const token = signToken(category);
+  
+          return { token, category };
+  
+        } catch (error) {
+          throw new Error('Error creating category');
+        }
+      },
+      addTransaction: async (parent, args) => {
+        try {
+          const transaction = await Transaction.create(args);
+          const token = signToken(transaction);
+  
+          return { token, transaction };
+  
+        } catch (error) {
+          throw new Error('Error creating transaction');
+        }
+      },
+      
+
   },
 };
-
-module.exports = resolvers;
