@@ -1,0 +1,15 @@
+/* make the customizations */
+
+$theme-colors: (
+  'primary': #FF5666, 
+  'secondary': #231B1B
+);
+
+// MAY REQUIRE EDITING
+// $btn-close-width: 2em;
+// $btn-close-height: $btn-close-width;
+// $btn-close-padding-x: .5em;
+// $btn-close-padding-y: $btn-close-padding-x;
+
+// Import all of Bootstrap's CSS
+@import "bootstrap/scss/bootstrap";
