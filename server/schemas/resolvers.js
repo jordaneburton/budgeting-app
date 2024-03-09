@@ -118,7 +118,7 @@ module.exports = {
         throw new Error('Error creating category');
       }
     },
-    addTransaction: async (parent, {categoryid, amount, description, date} ) => {
+    addTransaction: async (parent, { categoryid, amount, description, date }) => {
       try {
         const transaction = await Transaction.create({ amount, description, date });
         await Category.findByIdAndUpdate(categoryid, { $push: { transactions: transaction._id } });
@@ -130,7 +130,24 @@ module.exports = {
         throw new Error('Error creating transaction');
       }
     },
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+      }
 
-
+      throw AuthenticationError;
+    },
   },
+  updateTransaction: async (parent, { categoryID, amount, description, date }) => {
+    return await Transaction.findByIdAndUpdate(categoryID, { amount, description, date }, { new: true });
+  },
+
+  updateBudget: async (parent, { BudgetID, Amount, StartDate, EndDate }) => {
+    return await Budget.findByIdAndUpdate(BudgetID, { amount: Amount, startDate: StartDate, endDate: EndDate }, { new: true });
+  },
+
+  updateCategory: async (parent, { CategoryID, Name, Type }) => {
+    return await Category.findByIdAndUpdate(CategoryID, { name: Name, type: Type }, { new: true });
+  },
+
 };
