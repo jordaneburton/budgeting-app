@@ -16,14 +16,14 @@ const typeDefs = `
     totalAmount: Int
     StartDate: String
     budgetPeriod: String
-    categories: [String]
+    categories: [Category]
   }
   type Category {
     _id: ID
     name: String
     budgetAmount: Int
-    totalBudget: ID
-    transactions: [String]
+    budget: ID
+    transactions: [Transaction]
   }
   type Auth {
     token: ID
@@ -58,7 +58,7 @@ const typeDefs = `
     deleteUser(email: String, username: String, password: String, budget: String): User
     deleteTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
     deleteBudget(userid: ID, name: String, totalAmount: Int, startDate: String, budgetPeriod: String, categories: String): Budget
-    deleteCategory(budgetid: ID, name: String, budgetAmount: Int, totalBudget: Int, transactions: String): Category
+    deleteCategory(budgetid: ID, name: String, budgetAmount: Int, budget: Int, transactions: String): Category
 
   }
 `;

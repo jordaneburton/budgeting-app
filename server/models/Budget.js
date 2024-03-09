@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const { Category } = require('./Categories');
 
-const totalBudgetSchema = new Schema({
+const budgetSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -26,6 +26,6 @@ const totalBudgetSchema = new Schema({
     // Other fields related to the total budget if needed
 });
 
-const TotalBudget = model('TotalBudget', totalBudgetSchema);
+const Budget = model('Budget', budgetSchema);
 
-module.exports = TotalBudget;
+module.exports = Budget;

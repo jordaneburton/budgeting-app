@@ -108,7 +108,7 @@ module.exports = {
     },
     addCategory: async (parent, args) => {
       try {
-        const category = await Category.create({ ...args, totalBudget: args.budgetid });
+        const category = await Category.create({ ...args, budget: args.budgetid });
         await Budget.findByIdAndUpdate(args.budgetid, { $push: { categories: category._id } });
 
         return category;
