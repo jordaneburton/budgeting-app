@@ -1,9 +1,10 @@
 const TotalBudget = require('./Budget');
-const Category = require('./Categories');
+const { Category, Transaction } = require('./Categories');
 const User = require('./User');
 
 module.exports = {
-  TotalBudget,
+  Budget: TotalBudget,
   Category,
   User,
+  Transaction
 };

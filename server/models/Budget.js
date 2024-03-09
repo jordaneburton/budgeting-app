@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
+const { Category } = require('./Categories');
 
-const totalBudgetSchema = new mongoose.Schema({
+const totalBudgetSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -18,10 +19,13 @@ const totalBudgetSchema = new mongoose.Schema({
         enum: ['1 month', '2 months', '3 months', '6 months', '1 year'], // Example durations
         required: true,
     },
-    categories: [categorySchema],
+    categories: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Category'
+    }],
     // Other fields related to the total budget if needed
 });
 
-const TotalBudget = mongoose.model('TotalBudget', totalBudgetSchema);
+const TotalBudget = model('TotalBudget', totalBudgetSchema);
 
 module.exports = TotalBudget;

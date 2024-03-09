@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const categorySchema = new mongoose.Schema({
+const categorySchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -10,23 +10,19 @@ const categorySchema = new mongoose.Schema({
     required: true,
   },
   totalBudget: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'TotalBudget',
     required: true,
   },
+  
   // Other fields related to the category if needed
 });
 
-const Category = mongoose.model('Category', categorySchema);
+const Category = model('Category', categorySchema);
 
-const transactionSchema = new mongoose.Schema({
+const transactionSchema = new Schema({
   amount: {
     type: Number,
-    required: true,
-  },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
     required: true,
   },
   description: {
@@ -37,11 +33,9 @@ const transactionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  transactions: [transactionSchema],
-  // Other fields related to transactions if needed
 });
 
-const Transaction = mongoose.model('Transaction', transactionSchema);
+const Transaction = model('Transaction', transactionSchema);
 
 module.exports = {
   Category,
