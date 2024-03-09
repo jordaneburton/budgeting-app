@@ -9,13 +9,17 @@ const categorySchema = new Schema({
     type: Number,
     required: true,
   },
-  totalBudget: {
+  budget: {
     type: Schema.Types.ObjectId,
-    ref: 'TotalBudget',
+    ref: 'Budget',
     required: true,
   },
   
   // Other fields related to the category if needed
+  transactions: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Transaction',
+  }],
 });
 
 const Category = model('Category', categorySchema);
