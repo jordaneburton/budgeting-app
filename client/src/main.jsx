@@ -25,6 +25,23 @@ const router = createBrowserRouter([
           index: true,
           element: <DashboardPage />,
         },
+        // REFACTOR THESE LINES AFTER PAGES ARE CREATED
+        {
+          index: 'Select',
+          element: <DashboardPage />,
+        },
+        {
+          index: 'Edit',
+          element: <DashboardPage />,
+        },
+        {
+          index: 'Overviews',
+          element: <DashboardPage />,
+        },
+        {
+          index: 'Profile',
+          element: <DashboardPage />,
+        },
       ],
     },
   ]);

@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
-// import { usePageContext } from '../utils/PageContext';
+import { usePageContext } from '../utils/PageContext';
 // import PageHeader from '../components/PageHeader';
 
 function DashboardPage () {
-  // const { _, setPage } = usePageContext();
+  const { _, setPage } = usePageContext();
   useEffect(() => {
-    // setPage("Home");
+    setPage("Dashboard");
     window.scrollTo(0, 0);
   }, []);
 
   // const page = {
-  //   header: "WELCOME"
+  //   header: "CURRENT_BUDGET_NAME"
   // }
   return (
     <>
