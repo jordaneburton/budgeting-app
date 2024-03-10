@@ -1,9 +1,22 @@
 #root {
     max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+    /* margin: 0 auto; */
+    /* padding: 2rem; */
     text-align: center;
     color: black;
     font-family:  "JetBrains Mono", monospace;
     font-optical-sizing: auto;
 }
+
+
+/* NAVIGATION */
+
+.nav-link {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: black !important;
+  }
+  
+  .nav-link:hover {
+    background-color: white;
+  }
