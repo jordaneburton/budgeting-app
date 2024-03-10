@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 // import { usePageContext } from '../utils/PageContext';
 import NavBar from '../components/NavBar';
 
-function ErrorPage () {
+function LoginPage () {
 //      NON-FUNCTIONAL
 //   const { _, setPage } = usePageContext();
 //   useEffect(() => {
@@ -11,12 +11,11 @@ function ErrorPage () {
 
   return (
     <>
-      <NavBar />
       <div className="container pt-4">
-        error
+        Login
       </div>
     </>
   );
 }
 
-export default ErrorPage
+export default LoginPage

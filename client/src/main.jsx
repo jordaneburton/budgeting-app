@@ -16,6 +16,7 @@ import SelectPage from './pages/SelectPage';
 import EditPage from './pages/EditPage';
 import OverviewsPage from './pages/OverviewsPage';
 import ProfilePage from './pages/ProfilePage';
+import LoginPage from './pages/LoginPage';
 
 // Define the accessible routes, and which components respond to which URL
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: 'Profile',
         element: <ProfilePage />,
+      },
+      {
+        path: 'Login',
+        element: <LoginPage />,
       },
     ],
   },
