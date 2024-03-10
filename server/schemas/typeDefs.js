@@ -13,8 +13,9 @@ const typeDefs = `
   type Budget {
     _id: ID
     name: String
-    totalAmount: Int
-    StartDate: String
+    amount: Int
+    startDate: String
+    endDate: String
     budgetPeriod: String
     categories: [Category]
   }
@@ -47,17 +48,23 @@ const typeDefs = `
 
 
 
-    addBudget(userid: ID, name: String, totalAmount: Int, startDate: String, budgetPeriod: String, categories: [ID]): Budget
+    addBudget(userid: ID, name: String, amount: Int, startDate: String, endDate: String, budgetPeriod: String, categories: [ID]): Budget
 
     addCategory(budgetid: ID, name: String, budgetAmount: Int, transactions: String): Category
 
-    updateUser(UserID: ID, Email: String, Name: String): User
+    updateUser(userID: ID, Email: String, username: String): User
+
     updateTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
-    updateBudget(BudgetID: ID, Amount: Float, StartDate: String, EndDate: String): Budget
+
+    updateBudget(budgetID: ID, name: String, amount: Int, startDate: String, endDate: String, budgetPeriod: String): Budget
+
     updateCategory(CategoryID: ID, Name: String, Type: String): Category
-    deleteUser(email: String, username: String, password: String, budget: String): User
+    deleteUser(userID: ID, email: String, username: String, password: String, budget: String): User
     deleteTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
-    deleteBudget(userid: ID, name: String, totalAmount: Int, startDate: String, budgetPeriod: String, categories: String): Budget
+
+    deleteBudget(budgetID: ID, name: String, totalAmount: Int, startDate: String, budgetPeriod: String, categories: String): Budget
+
+
     deleteCategory(budgetid: ID, name: String, budgetAmount: Int, budget: Int, transactions: String): Category
 
   }

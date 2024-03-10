@@ -141,40 +141,45 @@ module.exports = {
       return await Transaction.findByIdAndUpdate(categoryID, { amount, description, date }, { new: true });
     },
   
-    updateBudget: async (parent, { BudgetID, Amount, StartDate, EndDate }) => {
-      return await Budget.findByIdAndUpdate(BudgetID, { amount: Amount, startDate: StartDate, endDate: EndDate }, { new: true });
+    updateBudget: async (parent, { name, budgetID, amount, startDate, endDate, budgetPeriod }) => {
+      return await Budget.findByIdAndUpdate(budgetID, { name: name, amount: amount, startDate: startDate, endDate: endDate, budgetPeriod: budgetPeriod }, { new: true });
     },
   
     updateCategory: async (parent, { CategoryID, Name, Type }) => {
       return await Category.findByIdAndUpdate(CategoryID, { name: Name, type: Type }, { new: true });
     },
+
+    deleteUser: async (parent, { userID }) => {
+      return await User.findOneAndDelete(
+        { _id: userID },
+        { new: true },
+        );
+    },
+  
+    deleteBudget: async (parent, { budgetID }) => {
+      return await Budget.findOneAndDelete(
+        { _id: budgetID },
+        // { $pull: { _id: budgetID } },
+        { new: true }
+      );
+    },
+  
+    deleteCategory: async (parent, { budgetId, categorytId }) => {
+      return await Budget.findOneAndDelete(
+        { _id: budgetID },
+        { $pull: { categories: category._Id } },
+        { new: true }
+      );
+    },
+  
+    deleteTransaction: async (parent, { categoryId, transactionId }) => {
+      return await Category.findOneAndDelete(
+        { _id: categoryID },
+        { $pull: { transactions: transaction._Id } },
+        { new: true }
+      );
+    },
   },
 
-  deleteUser: async (parent, { userId }) => {
-    return User.findOneAndDelete({ _id: user._Id });
-  },
-
-  deleteBudget: async (parent, { userId, budgetId }) => {
-    return User.findOneAndUpdate(
-      { _id: user._Id },
-      { $pull: { budgets: budget._Id } },
-      { new: true }
-    );
-  },
-
-  deleteCategory: async (parent, { budgetId, categorytId }) => {
-    return Budget.findOneAndUpdate(
-      { _id: budget._Id },
-      { $pull: { categories: category._Id } },
-      { new: true }
-    );
-  },
-
-  deleteTransaction: async (parent, { categoryId, transactionId }) => {
-    return Category.findOneAndUpdate(
-      { _id: category._Id },
-      { $pull: { transactions: transaction._Id } },
-      { new: true }
-    );
-  },
+  
 };

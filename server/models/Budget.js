@@ -6,11 +6,15 @@ const budgetSchema = new Schema({
         type: String,
         required: true,
     },
-    totalAmount: {
+    amount: {
         type: Number,
         required: true,
     },
     startDate: {
+        type: Date,
+        required: true,
+    },
+    endDate: {
         type: Date,
         required: true,
     },
