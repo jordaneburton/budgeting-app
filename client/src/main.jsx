@@ -13,6 +13,9 @@ import App from './App';
 import ErrorPage from './pages/ErrorPage';
 import DashboardPage from './pages/DashboardPage';
 import SelectPage from './pages/SelectPage';
+import EditPage from './pages/EditPage';
+import OverviewsPage from './pages/OverviewsPage';
+import ProfilePage from './pages/ProfilePage';
 
 // Define the accessible routes, and which components respond to which URL
 const router = createBrowserRouter([
@@ -31,15 +34,15 @@ const router = createBrowserRouter([
       },
       {
         path: 'Edit',
-        element: <DashboardPage />,
+        element: <EditPage />,
       },
       {
         path: 'Overviews',
-        element: <DashboardPage />,
+        element: <OverviewsPage />,
       },
       {
         path: 'Profile',
-        element: <DashboardPage />,
+        element: <ProfilePage />,
       },
     ],
   },
