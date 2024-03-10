@@ -150,4 +150,31 @@ module.exports = {
     },
   },
 
+  deleteUser: async (parent, { userId }) => {
+    return User.findOneAndDelete({ _id: user._Id });
+  },
+
+  deleteBudget: async (parent, { userId, budgetId }) => {
+    return User.findOneAndUpdate(
+      { _id: user._Id },
+      { $pull: { budgets: budget._Id } },
+      { new: true }
+    );
+  },
+
+  deleteCategory: async (parent, { budgetId, categorytId }) => {
+    return Budget.findOneAndUpdate(
+      { _id: budget._Id },
+      { $pull: { categories: category._Id } },
+      { new: true }
+    );
+  },
+
+  deleteTransaction: async (parent, { categoryId, transactionId }) => {
+    return Category.findOneAndUpdate(
+      { _id: category._Id },
+      { $pull: { transactions: transaction._Id } },
+      { new: true }
+    );
+  },
 };
