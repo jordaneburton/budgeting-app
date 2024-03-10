@@ -12,7 +12,6 @@ function App() {
       <>
         <Row className='vw-100 vh-100 m-0 p-0'>
           <PageProvider>
-            <NavBar />
             <Outlet />
           </PageProvider>
         </Row>

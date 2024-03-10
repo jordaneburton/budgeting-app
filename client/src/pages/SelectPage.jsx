@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { usePageContext } from '../utils/PageContext';
 import Col from 'react-bootstrap/esm/Col';
 // import PageHeader from '../components/PageHeader';
+import NavBar from '../components/NavBar';
 
 function SelectPage () {
   const { _, setPage } = usePageContext();
@@ -15,6 +16,7 @@ function SelectPage () {
   // }
   return (
     <>
+    <NavBar />
     <Col xs={12} md={9} className='p-0'>
       {/* <PageHeader header={page.header}/> */}
       <h2>
