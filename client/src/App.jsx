@@ -13,8 +13,8 @@ function App() {
     return (
       <>
         <PageProvider>
-          <NavBar classList='d-none d-md-inline' />
-          <NavCanvas classList='d-md-none' />
+          <NavBar />
+          {/* <NavCanvas classList='d-md-none' /> */}
           <Outlet />
         </PageProvider>
       </>
