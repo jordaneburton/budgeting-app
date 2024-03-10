@@ -1,16 +1,21 @@
 import { Outlet } from 'react-router-dom';
-// import { PageProvider } from './utils/PageContext';
+import { PageProvider } from './utils/PageContext';
 import './scss/App.scss'
 import './App.css'
-// only import the components you're using
+// import the components you're using
+import Row from 'react-bootstrap/Row';
+
+import NavBar from './components/NavBar';
 
 function App() {
     return (
       <>
-        {/* <PageProvider> */}
-          {/* <NavCanvas /> */}
-          <Outlet />
-        {/* </PageProvider> */}
+        <Row className='vw-100 vh-100 m-0 p-0'>
+          <PageProvider>
+            <NavBar />
+            <Outlet />
+          </PageProvider>
+        </Row>
       </>
     )
   }

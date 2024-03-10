@@ -3,10 +3,10 @@ import { usePageContext } from '../utils/PageContext';
 import Col from 'react-bootstrap/esm/Col';
 // import PageHeader from '../components/PageHeader';
 
-function DashboardPage () {
+function EditPage () {
   const { _, setPage } = usePageContext();
   useEffect(() => {
-    setPage("Dashboard");
+    setPage("Edit");
     window.scrollTo(0, 0);
   }, []);
 
@@ -18,11 +18,11 @@ function DashboardPage () {
     <Col xs={12} md={9} className='p-0'>
       {/* <PageHeader header={page.header}/> */}
       <h2>
-      Dashboard
+      Edit Budgets
       </h2>
     </Col>
     </>
   );
 }
 
-export default DashboardPage
+export default EditPage
