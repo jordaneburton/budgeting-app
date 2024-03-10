@@ -137,17 +137,17 @@ module.exports = {
 
       throw AuthenticationError;
     },
-  },
-  updateTransaction: async (parent, { categoryID, amount, description, date }) => {
-    return await Transaction.findByIdAndUpdate(categoryID, { amount, description, date }, { new: true });
-  },
-
-  updateBudget: async (parent, { BudgetID, Amount, StartDate, EndDate }) => {
-    return await Budget.findByIdAndUpdate(BudgetID, { amount: Amount, startDate: StartDate, endDate: EndDate }, { new: true });
-  },
-
-  updateCategory: async (parent, { CategoryID, Name, Type }) => {
-    return await Category.findByIdAndUpdate(CategoryID, { name: Name, type: Type }, { new: true });
+    updateTransaction: async (parent, { categoryID, amount, description, date }) => {
+      return await Transaction.findByIdAndUpdate(categoryID, { amount, description, date }, { new: true });
+    },
+  
+    updateBudget: async (parent, { BudgetID, Amount, StartDate, EndDate }) => {
+      return await Budget.findByIdAndUpdate(BudgetID, { amount: Amount, startDate: StartDate, endDate: EndDate }, { new: true });
+    },
+  
+    updateCategory: async (parent, { CategoryID, Name, Type }) => {
+      return await Category.findByIdAndUpdate(CategoryID, { name: Name, type: Type }, { new: true });
+    },
   },
 
 };
