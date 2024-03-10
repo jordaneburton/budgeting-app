@@ -45,7 +45,7 @@ function NavCanvas() {
                             { (currentPage.title === "Select") 
                                 ? <Link to="Select" className="nav-link py-3 rounded-pill" 
                                     style={{ backgroundColor: "#fff" }}
-                                    >Select</Link> 
+                                    >Select Budget</Link> 
                                 : <Link to="Select" className="nav-link py-3 rounded-pill" href="Select">Select Budget</Link>
                             }  
 

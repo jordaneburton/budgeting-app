@@ -2,24 +2,13 @@ import { useState, useEffect } from 'react';
 import { usePageContext } from '../utils/PageContext';
 import { Link } from 'react-router-dom';
 
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
 
 import NavCanvas from './NavCanvas';
 
 function NavBar() {   
-    const [show, setShow] = useState(false);
     const { currentPage, setPage } = usePageContext();
-    
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    
-    useEffect(() => {
-        setShow(false);
-    }, [currentPage]);
     
     return (
         <>
@@ -39,7 +28,7 @@ function NavBar() {
                     { (currentPage.title === "Select") 
                         ? <Link to="Select" className="nav-link py-3 rounded-pill" 
                             style={{ backgroundColor: "#FFF" }}
-                            >Select</Link> 
+                            >Select Budget</Link> 
                         : <Link to="Select" className="nav-link py-3 rounded-pill" href="Select">Select Budget</Link>
                     }  
 
