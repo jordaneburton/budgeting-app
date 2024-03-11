@@ -8,6 +8,10 @@
     font-optical-sizing: auto;
 }
 
+/* HEADER */
+h1 {
+  height: 6rem;
+}
 
 /* NAVIGATION */
 
