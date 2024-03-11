@@ -1,20 +1,27 @@
 import { Outlet } from 'react-router-dom';
 import { PageProvider } from './utils/PageContext';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import './scss/App.scss'
 import './App.css'
+
 // import the components you're using
 import Row from 'react-bootstrap/Row';
 
-import NavBar from './components/NavBar';
+const client = new ApolloClient({
+  uri: '/graphql',
+  cache: new InMemoryCache(),
+});
 
 function App() {
     return (
       <>
+      <ApolloProvider client={client}>
         <Row className='vw-100 vh-100 m-0 p-0'>
           <PageProvider>
             <Outlet />
           </PageProvider>
         </Row>
+      </ApolloProvider>
       </>
     )
   }
