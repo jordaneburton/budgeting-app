@@ -28,7 +28,13 @@ const budgetSchema = new Schema({
         ref: 'Category'
     }],
     // Other fields related to the total budget if needed
-});
+    },
+    {
+        toJSON: {
+          virtuals: true,
+        },
+      }
+);
 
 const Budget = model('Budget', budgetSchema);
 
