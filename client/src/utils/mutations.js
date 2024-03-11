@@ -17,7 +17,7 @@ export const ADD_BUDGET = gql`
     addBudget(name: $name) {
       _id
       name
-      totalAmount
+      amount
       budgetPeriod
       categories
     }
@@ -31,7 +31,6 @@ export const ADD_CATEGORY = gql`
       _id
       name
       budgetAmount
-      totalBudget
       transactions
     }
   }
@@ -43,7 +42,6 @@ export const ADD_TRANSACTION = gql`
     addTransaction(name: $name) {
       _id
       amount
-      category
       description
       date
     }
