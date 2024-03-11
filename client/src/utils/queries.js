@@ -17,7 +17,9 @@ export const QUERY_BUDGETS = gql`
     budgets {
       _id
       name
-      totalAmount
+      amount
+      startDate
+      endDate
       budgetPeriod
       categories
     }
@@ -31,7 +33,6 @@ export const QUERY_CATEGORIES = gql`
       _id
       name
       budgetAmount
-      totalBudget
       transactions
     }
   }
@@ -43,7 +44,6 @@ export const QUERY_TRANSACTIONS = gql`
     transactions {
       _id
       amount
-      category
       description
       date
     }
