@@ -23,7 +23,6 @@ const typeDefs = `
     _id: ID
     name: String
     budgetAmount: Int
-    budget: ID
     transactions: [Transaction]
   }
   type Auth {
@@ -52,20 +51,22 @@ const typeDefs = `
 
     addCategory(budgetid: ID, name: String, budgetAmount: Int, transactions: String): Category
 
-    updateUser(userID: ID, Email: String, username: String): User
+    updateUser(userID: ID, email: String, username: String): User
 
-    updateTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
+    updateTransaction(transactionID: ID, amount: Int, description: String, date: String): Transaction
 
     updateBudget(budgetID: ID, name: String, amount: Int, startDate: String, endDate: String, budgetPeriod: String): Budget
 
-    updateCategory(CategoryID: ID, Name: String, Type: String): Category
+    updateCategory(categoryID: ID, name: String, budgetAmount: Int): Category
+
     deleteUser(userID: ID, email: String, username: String, password: String, budget: String): User
-    deleteTransaction(categoryID: ID, amount: Int, description: String, date: String): Transaction
+
+    deleteTransaction(transactionID: ID, amount: Int, description: String, date: String): Transaction
 
     deleteBudget(budgetID: ID, name: String, totalAmount: Int, startDate: String, budgetPeriod: String, categories: String): Budget
 
 
-    deleteCategory(budgetid: ID, name: String, budgetAmount: Int, budget: Int, transactions: String): Category
+    deleteCategory(categoryID: ID, name: String, budgetAmount: Int, budget: Int, transactions: String): Category
 
   }
 `;
