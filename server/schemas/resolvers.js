@@ -108,7 +108,7 @@ module.exports = {
     },
     addCategory: async (parent, args) => {
       try {
-        const category = await Category.create({ ...args, budget: args.budgetid });
+        const category = await Category.create(args);
         await Budget.findByIdAndUpdate(args.budgetid, { $push: { categories: category._id } });
 
         return category;
@@ -137,16 +137,19 @@ module.exports = {
 
       throw AuthenticationError;
     },
-    updateTransaction: async (parent, { categoryID, amount, description, date }) => {
-      return await Transaction.findByIdAndUpdate(categoryID, { amount, description, date }, { new: true });
+
+
+    updateTransaction: async (parent, { transactionID, amount, description, date }) => {
+      return await Transaction.findByIdAndUpdate(transactionID, { amount: amount, description: description, date: date }, { new: true });
     },
   
     updateBudget: async (parent, { name, budgetID, amount, startDate, endDate, budgetPeriod }) => {
       return await Budget.findByIdAndUpdate(budgetID, { name: name, amount: amount, startDate: startDate, endDate: endDate, budgetPeriod: budgetPeriod }, { new: true });
     },
   
-    updateCategory: async (parent, { CategoryID, Name, Type }) => {
-      return await Category.findByIdAndUpdate(CategoryID, { name: Name, type: Type }, { new: true });
+
+    updateCategory: async (parent, { categoryID, name, budgetAmount }) => {
+      return await Category.findByIdAndUpdate(categoryID, { name: name, budgetAmount: budgetAmount }, { new: true });
     },
 
     deleteUser: async (parent, { userID }) => {
@@ -164,18 +167,18 @@ module.exports = {
       );
     },
   
-    deleteCategory: async (parent, { budgetId, categorytId }) => {
-      return await Budget.findOneAndDelete(
-        { _id: budgetID },
-        { $pull: { categories: category._Id } },
+    deleteCategory: async (parent, { categoryID }) => {
+      return await Category.findOneAndDelete(
+        { _id: categoryID },
+        // { $pull: { categories: category._Id } },
         { new: true }
       );
     },
   
-    deleteTransaction: async (parent, { categoryId, transactionId }) => {
-      return await Category.findOneAndDelete(
-        { _id: categoryID },
-        { $pull: { transactions: transaction._Id } },
+    deleteTransaction: async (parent, { transactionID }) => {
+      return await Transaction.findOneAndDelete(
+        { _id: transactionID },
+        // { $pull: { transactions: transaction._Id } },
         { new: true }
       );
     },
