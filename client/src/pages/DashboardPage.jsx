@@ -4,6 +4,9 @@ import Col from 'react-bootstrap/esm/Col';
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 
+import { useQuery } from '@apollo/client';
+import { QUERY_BUDGETS } from '../utils/queries';
+
 function DashboardPage () {
   const { _, setPage } = usePageContext();
   useEffect(() => {
@@ -11,10 +14,14 @@ function DashboardPage () {
     window.scrollTo(0, 0);
   }, []);
 
+  const { loading, data } = useQuery(QUERY_BUDGETS);
+  const budgets = data?.budgets || [];
+
   // make sure to import budget from selected budget
   const page = {
     header: "CURRENT_BUDGET_NAME"
   }
+
   return (
     <>
     <NavBar />
@@ -23,6 +30,14 @@ function DashboardPage () {
       <h2>
       Dashboard
       </h2>
+      {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <div>
+              <p>Here's our budgets: </p>
+              <div>{budgets}</div>
+            </div>
+          )}
     </Col>
     </>
   );
