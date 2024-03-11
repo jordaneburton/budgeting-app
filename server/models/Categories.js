@@ -9,20 +9,20 @@ const categorySchema = new Schema({
     type: Number,
     required: true,
   },
-  // budget: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Budget',
-  //   required: true,
-  // },
+
   
   // // Other fields related to the category if needed
-  // transactions: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Transaction',
-  // }],
-});
-
-const Category = model('Category', categorySchema);
+  transactions: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Transaction',
+  }],
+},
+{
+  toJSON: {
+    virtuals: true,
+  },
+}
+);
 
 const transactionSchema = new Schema({
   amount: {
@@ -37,9 +37,17 @@ const transactionSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-});
+},
+{
+  toJSON: {
+    virtuals: true,
+  },
+}
+);
 
+const Category = model('Category', categorySchema);
 const Transaction = model('Transaction', transactionSchema);
+
 
 module.exports = {
   Category,
