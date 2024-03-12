@@ -64,3 +64,21 @@ export const QUERY_TRANSACTIONS = gql`
     }
   }
 `;
+
+export const QUERY_BUDGET = gql`
+query Query($budgetId: ID) {
+  budget(BudgetID: $budgetId) {
+    _id
+    name
+    budgetPeriod
+    startDate
+    amount
+    endDate
+    categories {
+      _id
+      name
+      budgetAmount
+    }
+  }
+}
+`;
