@@ -70,8 +70,6 @@ const typeDefs = `
 
     deleteCategory(categoryID: ID, name: String, budgetAmount: Int, budget: Int, transactions: String): Category
 
-    login(email: String, password: String): Auth
-
   }
 `;
 module.exports = typeDefs;
