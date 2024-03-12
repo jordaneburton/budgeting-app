@@ -1,48 +1,26 @@
-// // TransactionPieChart.js
-// import React, { useEffect, useState } from 'react';
-// import { Doughnut } from 'react-chartjs-2';
+import React from 'react';
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
-// const TransactionPieChart = ({ transactions }) => {
-//     const [chartData, setChartData] = useState({});
+ChartJS.register(ArcElement, Tooltip, Legend);
+const PieChart = ({ data }) => {
+  const chartData = {
+    labels: data.map(category => category.name),
+    datasets: [
+      {
+        data: data.map(category => category.budgetAmount),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+        ],
+      },
+    ],
+  };
 
-//     useEffect(() => {
-//       // Process transactions and update chart data
-//       const processedData = processTransactions(transactions);
-//       setChartData(processedData);
-//     }, [transactions]);
+  return <Pie data={chartData} />;
+};
 
-//     const processTransactions = (transactions) => {
-//       // Your logic to organize transactions by category
-//       // Example: Assuming transactions have a 'category' property
-//       const categories = [...new Set(transactions.map((transaction) => transaction.category))];
-//       const data = categories.map((category) => {
-//         const categoryTransactions = transactions.filter((transaction) => transaction.category === category);
-//         const totalAmount = categoryTransactions.reduce((total, transaction) => total + transaction.amount, 0);
-//         return totalAmount;
-//       });
-
-//       return {
-//         labels: categories,
-//         datasets: [
-//           {
-//             data,
-//             backgroundColor: generateRandomColors(categories.length),
-//             hoverBackgroundColor: generateRandomColors(categories.length),
-//           },
-//         ],
-//       };
-//     };
-
-//     const generateRandomColors = (count) => {
-//       // Generate random colors (you may use a library for better color generation)
-//       const colors = [];
-//       for (let i = 0; i < count; i++) {
-//         colors.push(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
-//       }
-//       return colors;
-//     };
-
-//     return <Doughnut data={chartData} />;
-//   };
-
-//   export default TransactionPieChart;
+export default PieChart;
