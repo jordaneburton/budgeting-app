@@ -5,7 +5,15 @@ module.exports = {
   Query: {
     user: async (parent, args) => {
       try {
-        const user = await User.findById(args.userID).populate('budgets').populate('categories').populate('transactions');
+        const user = await User.findById(args.userID).populate({
+          path: 'budgets',
+          populate: {
+            path: 'categories',
+            populate: {
+              path: 'transactions'
+            }
+          }
+      });
         if (!user) {
           throw new Error('User not found');
         }
