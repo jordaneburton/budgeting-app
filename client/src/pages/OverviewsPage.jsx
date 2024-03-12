@@ -11,9 +11,6 @@ function OverviewsPage () {
     window.scrollTo(0, 0);
   }, []);
 
-  // const page = {
-  //   header: "CURRENT_BUDGET_NAME"
-  // }
   return (
     <>
     <NavBar />
