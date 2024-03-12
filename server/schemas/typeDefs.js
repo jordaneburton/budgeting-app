@@ -70,6 +70,7 @@ const typeDefs = `
 
     deleteCategory(categoryID: ID, name: String, budgetAmount: Int, budget: Int, transactions: String): Category
 
+
   }
 `;
 module.exports = typeDefs;
