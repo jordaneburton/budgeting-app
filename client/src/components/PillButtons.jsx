@@ -6,7 +6,7 @@ function PillButtons(props) {
     const [mobileName, setMobileName] = useState((props.name.length < 12) ? props.name : props.name.slice(0,10) + '...');
     return (
         <>
-            <div className='d-flex flex-wrap flex-column pill-button justify-content-center rounded-end-pill mb-4'
+            <div onClick={props.onClick} className='d-flex flex-wrap flex-column pill-button justify-content-center rounded-end-pill mb-4'
                 style={{ backgroundColor: `${color}` }}>
                 <h2 className='fw-semibold d-md-none'>{ mobileName.toUpperCase() }</h2>
                 <h2 className='fw-semibold d-none d-md-inline'>{ name.toUpperCase() }</h2>
