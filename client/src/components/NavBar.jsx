@@ -5,16 +5,11 @@ import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav'
 
-import NavCanvas from './NavCanvas';
-
 function NavBar() {   
     const { currentPage, setPage } = usePageContext();
     
     return (
         <>
-            {/* Nav Collapse for Mobile */}
-            <NavCanvas />
-
             {/* Nav Bar for Desktop/Tablet */}
             <Col md={3} className="bg-primary vh-100 d-none d-md-inline">
                 <Nav className="justify-content-center text-center h2 flex-column flex-grow-1 my-2"> 

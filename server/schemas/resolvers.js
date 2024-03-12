@@ -5,7 +5,7 @@ module.exports = {
   Query: {
     user: async (parent, args) => {
       try {
-        const user = await User.findById(args.userID);
+        const user = await User.findById(args.userID).populate('budgets');
         if (!user) {
           throw new Error('User not found');
         }
@@ -16,7 +16,7 @@ module.exports = {
     },
     users: async () => {
       try {
-        return await User.find({});
+        return await User.find({}).populate('budgets');
       } catch (error) {
         throw AuthenticationError;
       }
@@ -44,7 +44,7 @@ module.exports = {
     budget: async (parent, args, context) => {
       try {
         if (!context.user) throw AuthenticationError;
-        const budget = await Budget.findById(args.BudgetID);
+        const budget = await Budget.findById(args.BudgetID).populate('categories');
         if (!budget) {
           throw new Error('Budget not found');
         }
@@ -56,14 +56,14 @@ module.exports = {
     },
     budgets: async () => {
       try {
-        return await Budget.find({});
+        return await Budget.find({}).populate('categories');
       } catch (error) {
         throw AuthenticationError;
       }
     },
     category: async (parent, args) => {
       try {
-        const category = await Category.findById(args.CategoryID);
+        const category = await Category.findById(args.CategoryID).populate('transactions');
         if (!category) {
           throw new Error('Category not found');
         }
@@ -75,14 +75,30 @@ module.exports = {
     },
     categories: async () => {
       try {
-        return await Category.find({});
+        return await Category.find({}).populate('transactions');
       } catch (error) {
         throw AuthenticationError;
       }
     },
   },
   Mutation: {
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
 
+      if (!user) {
+        throw AuthenticationError;
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw AuthenticationError;
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
+    },
     addUser: async (parent, args) => {
       try {
         const user = await User.create(args);
@@ -118,10 +134,10 @@ module.exports = {
         throw new Error('Error creating category');
       }
     },
-    addTransaction: async (parent, { categoryid, amount, description, date }) => {
+    addTransaction: async (parent, args) => {
       try {
-        const transaction = await Transaction.create({ amount, description, date });
-        await Category.findByIdAndUpdate(categoryid, { $push: { transactions: transaction._id } });
+        const transaction = await Transaction.create(args);
+        await Category.findByIdAndUpdate(args.categoryid, { $push: { transactions: transaction._id } });
 
         return transaction;
 
