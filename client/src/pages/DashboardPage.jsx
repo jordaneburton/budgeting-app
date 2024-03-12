@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { usePageContext } from '../utils/PageContext';
 import Col from 'react-bootstrap/esm/Col';
 import NavBar from '../components/NavBar';
+import NavCanvas from '../components/NavCanvas';
 import Header from '../components/Header';
 
 import { useQuery } from '@apollo/client';
@@ -16,10 +17,15 @@ function DashboardPage () {
 
   const { loading, data } = useQuery(QUERY_BUDGETS);
   const budgets = data?.budgets || [];
+  console.log(budgets);
 
   // make sure to import budget from selected budget
   const page = {
     header: "CURRENT_BUDGET_NAME"
+  }
+
+  const testData = {
+    
   }
 
   return (
@@ -39,6 +45,7 @@ function DashboardPage () {
             </div>
           )}
     </Col>
+    <NavCanvas />
     </>
   );
 }

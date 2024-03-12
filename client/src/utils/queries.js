@@ -6,7 +6,15 @@ export const QUERY_USERS = gql`
       _id
       username
       email
-      budgets
+      budgets {
+        _id
+        categories {
+          _id
+          transactions {
+            _id
+          }
+        }
+      }
     }
   }
 `;
@@ -21,7 +29,12 @@ export const QUERY_BUDGETS = gql`
       startDate
       endDate
       budgetPeriod
-      categories
+      categories {
+        _id
+        transactions {
+          _id
+        }
+      }
     }
   }
 `;
@@ -33,7 +46,9 @@ export const QUERY_CATEGORIES = gql`
       _id
       name
       budgetAmount
-      transactions
+      transactions {
+        _id
+      }
     }
   }
 `;

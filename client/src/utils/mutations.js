@@ -6,7 +6,15 @@ export const ADD_USER = gql`
       _id
       username
       email
-      budgets
+      budgets {
+        _id
+        categories {
+          _id
+          transactions {
+            _id
+          }
+        }
+      }
     }
   }
 `;
@@ -19,7 +27,12 @@ export const ADD_BUDGET = gql`
       name
       amount
       budgetPeriod
-      categories
+      categories {
+        _id
+        transactions {
+          _id
+        }
+      }
     }
   }
 `;
@@ -31,7 +44,9 @@ export const ADD_CATEGORY = gql`
       _id
       name
       budgetAmount
-      transactions
+      transactions {
+        _id
+      }
     }
   }
 `;
