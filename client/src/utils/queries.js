@@ -65,6 +65,23 @@ export const QUERY_TRANSACTIONS = gql`
   }
 `;
 
+export const QUERY_BUDGET = gql`
+query Query($budgetId: ID) {
+  budget(BudgetID: $budgetId) {
+    _id
+    name
+    budgetPeriod
+    startDate
+    amount
+    endDate
+    categories {
+      _id
+      name
+      budgetAmount
+    }
+  }
+}
+`;
 
 export const QUERY_BY_USER = gql`
  query User($userId: ID) {
