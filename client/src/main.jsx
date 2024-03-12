@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         element: <EditPage />,
       },
       {
-        path: 'Overviews',
+        path: '/Overviews',
         element: <OverviewsPage />,
       },
       {
