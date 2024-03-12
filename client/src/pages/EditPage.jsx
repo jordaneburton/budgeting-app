@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { usePageContext } from '../utils/PageContext';
 import Col from 'react-bootstrap/esm/Col';
@@ -19,6 +19,7 @@ import { QUERY_BUDGET, QUERY_BUDGETS } from '../utils/queries';
 
 function EditPage() {
   const { _, setPage } = usePageContext();
+  const [inputs, setInputs] = useState({});
   useEffect(() => {
     setPage("Edit");
     window.scrollTo(0, 0);
@@ -40,6 +41,20 @@ const onClick = async (selection) => {
    } )
 }
     const testData = budgetData?.budget 
+
+
+    const handleChange = (event) => {
+      const name = event.target.name;
+      const value = event.target.value;
+      setInputs(values => ({...values, [name]: value}))
+    }
+
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      alert(inputs);
+    }
+  
     
 
 
@@ -63,13 +78,13 @@ const onClick = async (selection) => {
             </Col>
             <Col xs={10} md={8} className='position-relative my-2 z-1 d-flex flex-wrap flex-column align-items-end'>
               <div className='d-flex flex-wrap flex-column pill-button justify-content-center rounded-start-pill bg-info w-75 mb-4'>
-                <h2 className='fw-semibold'>{budgets[0].name.toUpperCase()}</h2>
+                <h2 className='fw-semibold'>{budgets[0]?.name?.toUpperCase()}</h2>
                 <form onSubmit={handleSubmit}>
       <label>Enter your name:
       <input 
         type="text" 
         name="username" 
-        value={testData.amount || ""} 
+        value={testData?.amount || ""} 
         onChange={handleChange}
       />
       </label>
@@ -77,7 +92,7 @@ const onClick = async (selection) => {
         <input 
           type="number" 
           name="age" 
-          value={inputs.age || ""} 
+          value={testData?.timeFrame || ""} 
           onChange={handleChange}
         />
         </label>
