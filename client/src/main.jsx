@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client'
 // Bringing in the required imports from 'react-router-dom' to set up application routing behavior
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import './index.css'
 // Import our custom CSS
 import './scss/styles.scss'
+import './index.css'
 
 // Bringing in the pages the router will use to conditionally show the appropriate views
 import App from './App';

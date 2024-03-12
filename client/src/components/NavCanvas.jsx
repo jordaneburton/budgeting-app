@@ -20,10 +20,10 @@ function NavCanvas() {
     
     return (
         <>
-            <Button variant="primary" onClick={handleShow} 
-                className="position-fixed rounded-circle top-0 end-0 m-1 z-3 d-md-none"
-                style={{ width:"5rem", height: "5rem"}}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="85%" height="85%" fillRule="inherit" className="bi bi-list" viewBox="0 0 16 16">
+            <Button variant="light" onClick={handleShow} 
+                className="position-fixed rounded-circle top-0 end-0 m-3 z-3 d-md-none"
+                style={{ width:"3.5rem", height: "3.5rem"}}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fillRule="inherit" className="bi bi-list" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                 </svg>
             </Button>
