@@ -64,3 +64,32 @@ export const QUERY_TRANSACTIONS = gql`
     }
   }
 `;
+
+
+export const QUERY_BY_USER = gql`
+ query User($userId: ID) {
+  user(userID: $userId) {
+    _id
+    budgets {
+      name
+      _id
+      amount
+      budgetPeriod
+      categories {
+        transactions {
+          date
+          description
+          amount
+          _id
+        }
+        name
+        budgetAmount
+        _id
+      }
+      endDate
+      startDate
+    }
+    email
+    username
+  }
+}`;

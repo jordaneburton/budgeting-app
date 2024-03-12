@@ -9,7 +9,7 @@ function PillButtons(props) {
     const [name, setName] = useState((props.name.length < 9) ? props.name : props.name.slice(0,8) + '...' )
     return (
         <>
-            <div className='d-flex flex-wrap flex-column pill-button justify-content-center rounded-end-pill mb-4'
+            <div onClick={props.onClick} className='d-flex flex-wrap flex-column pill-button justify-content-center rounded-end-pill mb-4'
                 style={{ backgroundColor: `${color}` }}>
                 <h2 className='fw-semibold d-md-none'>{ props.name.toUpperCase() }</h2>
                 <h2 className='fw-semibold d-none d-md-inline'>{ name.toUpperCase() }</h2>
