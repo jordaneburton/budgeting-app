@@ -51,8 +51,8 @@ function DashboardPage () {
       {/* <h2>
       Dashboard
       </h2> */}
-      <Row>
-        <Col xs={10} md={4} className='position-relative my-2 z-1'>
+      <Row className='m-0'>
+        <Col xs={10} md={4} className='position-relative p-0 my-2 z-1'>
           {loading ? (
               <div>Loading...</div>
             ) : (
@@ -61,7 +61,8 @@ function DashboardPage () {
                 )
             )}
         </Col>
-        <Col xs={10} md={8}  className='position-relative my-2 z-1 d-flex flex-wrap flex-column align-items-end'>
+
+        <Col xs={10} md={8}  className='position-relative p-0 my-2 z-1 d-flex flex-wrap flex-column align-items-end'>
           <div className='d-flex flex-wrap flex-column pill-button justify-content-center rounded-start-pill bg-info w-75 mb-4'>
             <h2 className='fw-semibold'>{ testData[0].name.toUpperCase() }</h2>
           </div>
