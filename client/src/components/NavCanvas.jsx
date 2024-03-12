@@ -43,31 +43,31 @@ function NavCanvas() {
                             }
                             
                             { (currentPage.title === "Select") 
-                                ? <Link to="Select" className="nav-link py-3 rounded-pill" 
+                                ? <Link to="/Select" className="nav-link py-3 rounded-pill" 
                                     style={{ backgroundColor: "#fff" }}
                                     >Select Budget</Link> 
-                                : <Link to="Select" className="nav-link py-3 rounded-pill" href="Select">Select Budget</Link>
+                                : <Link to="/Select" className="nav-link py-3 rounded-pill" href="Select">Select Budget</Link>
                             }  
 
                             { (currentPage.title === "Edit") 
-                                ? <Link to="Edit" className="nav-link py-3 rounded-pill" 
+                                ? <Link to="/Edit" className="nav-link py-3 rounded-pill" 
                                     style={{ backgroundColor: "#fff" }}
                                     >Edit Budgets</Link> 
-                                : <Link to="Edit" className="nav-link py-3 rounded-pill" href="Edit">Edit Budgets</Link> 
+                                : <Link to="/Edit" className="nav-link py-3 rounded-pill" href="Edit">Edit Budgets</Link> 
                             }        
                             
                             { (currentPage.title === "Overviews") 
-                                ? <Link to="Overviews" className="nav-link py-3 rounded-pill" 
+                                ? <Link to="/Overviews" className="nav-link py-3 rounded-pill" 
                                     style={{ backgroundColor: "#fff" }}
                                     >Overviews</Link>
-                                : <Link to="Overviews" className="nav-link py-3 rounded-pill" href="Overviews">Overviews</Link> 
+                                : <Link to="/Overviews" className="nav-link py-3 rounded-pill" href="Overviews">Overviews</Link> 
                             }
                             
                             { (currentPage.title === "Profile") 
-                                ? <Link to="Profile" className="nav-link py-3 rounded-pill" 
+                                ? <Link to="/Profile" className="nav-link py-3 rounded-pill" 
                                     style={{ backgroundColor: "#fff" }}
                                     >Profile</Link>
-                                : <Link to="Profile" className="nav-link py-3 rounded-pill" href="Profile">Profile</Link>
+                                : <Link to="/Profile" className="nav-link py-3 rounded-pill" href="Profile">Profile</Link>
                             }
                         </Nav>
                     </Offcanvas.Body>
