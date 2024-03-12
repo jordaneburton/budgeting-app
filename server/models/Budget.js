@@ -16,7 +16,7 @@ const budgetSchema = new Schema({
     },
     endDate: {
         type: Date,
-        required: true,
+        required: false,
     },
     budgetPeriod: {
         type: String,
