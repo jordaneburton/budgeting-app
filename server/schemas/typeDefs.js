@@ -43,6 +43,8 @@ const typeDefs = `
     categories: [Category]
   }
   type Mutation {
+    login(email: String!, password: String!): Auth
+
     addUser(email: String, username: String, password: String, budgets: [String]): Auth
 
     addBudget(userid: ID, name: String, amount: Int, startDate: String, endDate: String, budgetPeriod: String, categories: [ID]): Budget
