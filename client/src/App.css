@@ -18,6 +18,10 @@ h1 {
   height: 7rem;
 }
 
+.mobile-header {
+  padding-right: 7rem;
+}
+
 /* NAVIGATION */
 
 .nav-link {
