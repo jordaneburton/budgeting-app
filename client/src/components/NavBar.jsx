@@ -11,7 +11,7 @@ function NavBar() {
     return (
         <>
             {/* Nav Bar for Desktop/Tablet */}
-            <Col md={3} className="bg-primary vh-100 d-none d-md-inline">
+            <Col md={3} className="bg-primary vh-100 d-none d-md-inline z-3">
                 <Nav className="justify-content-center text-center h2 flex-column flex-grow-1 my-2"> 
                     { (currentPage.title === "Dashboard")
                         ? <Link to="/" className="nav-link py-2 rounded-pill" 
