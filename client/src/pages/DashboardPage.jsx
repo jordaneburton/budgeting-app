@@ -19,18 +19,19 @@ function DashboardPage () {
   const { useBudget, setBudget} = useState();
 
 
-  // TEMPORARY CODE PIECE
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiam9yZGFuZS5idXJ0b25AZ21haWwuY29tIiwiX2lkIjoiNjVmMDk1NjZlMzY2N2Q0YTA2MGVmMzNiIn0sImlhdCI6MTcxMDI2NTcwMiwiZXhwIjoxNzEwMzUyMTAyfQ.Erbx-UyTGNIyfnDVViR2mj-Hmxu4Qvz0ESFK2bHu2o0'
+  const { loading, data } = useQuery(QUERY_BUDGETS);
+  const budgets = data?.budgets || [];
 
-  
-  const { loading, data } = useQuery(QUERY_BUDGETS, {
-    headers: {
-      Authorization: token ? `Bearer ${token}` : "",
-    },
-    variables: {"budgetId": "65f097b4e3667d4a060ef33e"}
-  });
-  const categories = data?.budgets[0].categories || [];
-  console.log(categories);
+
+
+  // const { loading, data } = useQuery(QUERY_BUDGETS, {
+  //   headers: {
+  //     Authorization: token ? `Bearer ${token}` : "",
+  //   },
+  //   variables: {"budgetId": "65f097b4e3667d4a060ef33e"}
+  // });
+  // const categories = data?.budgets[0].categories || [];
+  // console.log(categories);
   
   useEffect(() => {
     setPage("Dashboard");
@@ -76,7 +77,7 @@ function DashboardPage () {
           {loading ? (
               <div></div>
             ) : (
-              categories.map((category, index) => 
+              testData.map((category, index) => 
                 <PillButtons key={index} name={category.name}/>
               )
             )}
