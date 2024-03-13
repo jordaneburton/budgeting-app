@@ -77,10 +77,10 @@ const onClick = async (selection) => {
               )}
             </Col>
             <Col xs={10} md={8} className='position-relative my-2 z-1 d-flex flex-wrap flex-column align-items-end'>
-              <div className='d-flex flex-wrap flex-column pill-button justify-content-center rounded-start-pill bg-info w-75 mb-4'>
+              <div className='form-container d-flex flex-wrap flex-column pill-button justify-content-center  bg-info w-75 mb-4'>
                 <h2 className='fw-semibold'>{budgets[0]?.name?.toUpperCase()}</h2>
                 <form onSubmit={handleSubmit}>
-      <label>Enter your name:
+      <label>Name:
       <input 
         type="text" 
         name="username" 
@@ -88,7 +88,31 @@ const onClick = async (selection) => {
         onChange={handleChange}
       />
       </label>
-      <label>Enter your age:
+      <label>Time Frame:
+        <input 
+          type="number" 
+          name="age" 
+          value={testData?.timeFrame || ""} 
+          onChange={handleChange}
+        />
+        </label>
+        <label>Time Frame:
+        <input 
+          type="number" 
+          name="age" 
+          value={testData?.timeFrame || ""} 
+          onChange={handleChange}
+        />
+        </label>
+        <label>Time Frame:
+        <input 
+          type="number" 
+          name="age" 
+          value={testData?.timeFrame || ""} 
+          onChange={handleChange}
+        />
+        </label>
+        <label>Time Frame:
         <input 
           type="number" 
           name="age" 
