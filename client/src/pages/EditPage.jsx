@@ -9,17 +9,20 @@ import NavBar from '../components/NavBar';
 import NavCanvas from '../components/NavCanvas';
 import Header from '../components/Header';
 import PillButtons from '../components/PillButtons';
-
+import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 import { useQuery, useLazyQuery } from '@apollo/client';
-import { QUERY_BUDGET, QUERY_BUDGETS } from '../utils/queries';
+import { QUERY_BUDGET, QUERY_BUDGETS, QUERY_BY_USER } from '../utils/queries';
+import auth from '../utils/auth';
 
 
 function EditPage() {
   const { _, setPage } = usePageContext();
-  // const [inputs, setInputs] = useState({});
-  const [selectedBudgetName, setSelectedBudgetName, inputs, setInputs] = useState('');
+  const [inputs, setInputs] = useState({});
+  const [selectedBudgetName, setSelectedBudgetName] = useState('');
   useEffect(() => {
     setPage("Edit");
     window.scrollTo(0, 0);
@@ -27,9 +30,9 @@ function EditPage() {
 
 
 
-  const { loading, data } = useQuery(QUERY_BUDGETS);
+  const { loading, error, data } = useQuery(QUERY_BY_USER, { variables: { userId: auth.getProfile().data._id } });
   const [findbudget, { loading: budgetLoading, data: budgetData }] = useLazyQuery(QUERY_BUDGET)
-  const budgets = data?.budgets || [];
+  const budgets = data?.user.budgets || [];
   console.log(budgets);
 
   const page = {
@@ -55,7 +58,7 @@ function EditPage() {
     const value = event.target.value;
     setInputs(values => ({ ...values, [name]: value }))
   }
-  
+
 
 
   const handleSubmit = (event) => {
@@ -69,7 +72,7 @@ function EditPage() {
   return (
     <>
       <NavBar />
-      <Col xs={6} md={9} className='p-0' style={{ backgroundColor: "#FF5666", height: '10%', border: "2px solid white", }}>
+      <Col xs={6} md={9} className='p-0' style={{ backgroundColor: "#FF5666", height: '12%', border: "2px solid white", }}>
         {/* <Header header={page.header}/> */}
         <h2>
           {selectedBudgetName}
@@ -79,19 +82,20 @@ function EditPage() {
             {loading ? (
               <div>Loading...</div>
             ) : (
-              budgets.map((category, index) =>
+              budgets?.map((category, index) =>
                 <PillButtons key={index} name={category.name} onClick={() => onClick(category._id)} />
               )
             )}
           </Col>
           <Col xs={10} md={8} className='position-relative my-2 z-1 d-flex flex-wrap flex-column align-items-end'>
+
             <div className='form-container d-flex flex-wrap flex-column pill-button justify-content-center  bg-info w-75 mb-4'>
               {/* <h2 className='fw-semibold'>{budgets[0]?.name?.toUpperCase()}</h2> */}
               <form onSubmit={handleSubmit}>
                 <label>Name:
                   <input
                     type="text"
-                    name="string"
+                    name="text"
                     value={testData?.name || ""}
                     onChange={handleChange}
                   />
@@ -112,14 +116,13 @@ function EditPage() {
                     onChange={handleChange}
                   />
                 </label>
-                <label>Categories:
-                  <input
-                    type="text"
-                    category="age"
-                    value={testData?.categories || ""}
-                    onChange={handleChange}
-                  />
+                <label>Categories
                 </label>
+                <DropdownButton variant= "light" id="dropdown-variants-Info" title="Dropdown button">
+                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                </DropdownButton>
                 <label>Category Name:
                   <input
                     type="text"
@@ -136,6 +139,7 @@ function EditPage() {
                     onChange={handleChange}
                   />
                 </label>
+                <Button variant="primary">Update</Button>{' '}
                 <input type="submit" />
               </form>
             </div>
