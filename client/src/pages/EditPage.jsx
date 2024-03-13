@@ -33,7 +33,7 @@ function EditPage() {
   const { loading, error, data } = useQuery(QUERY_BY_USER, { variables: { userId: auth.getProfile().data._id } });
   // const [findbudget, { loading: budgetLoading, data: budgetData }] = useLazyQuery(QUERY_BUDGET)
   const budgets = data?.user.budgets || [];
-  // console.log(budgets);
+  console.log(budgets);
 
   const page = {
     header: "Edit Budgets"
@@ -45,17 +45,21 @@ function EditPage() {
     const selectedBudget = budgets.find((budget) => budget._id === selection);
     setSelectedBudgetName(selectedBudget.name);
 
+
+
+
     // Fill form with attributes
-    setInputs(() => ({ [name]: selectedBudget.name, [startdate]: selectedBudget.startDate, [enddate]: selectedBudget.endDate }))
+    setInputs(() => ({ name: selectedBudget.name, startDate: selectedBudget.startDate, endDate: selectedBudget.endDate, amount: selectedBudget.amount }))
   }
 
 
-  const testData = data?.user.budgets[0] || [];
+
+  // const testData = data?.user.budgets[1] || [];
 
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setInputs(values => ({ ...values, [name]: value }))
+    setInputs(values => ({ ...values, name: value }))
   }
 
 
@@ -94,47 +98,39 @@ function EditPage() {
                 <label>Name:
                   <input
                     type="text"
-                    name=""
-                    value={testData?.name || ""}
+                    name="name" // Ensure you provide the correct name attribute here
+                    value={inputs.name || ""}
                     onChange={handleChange}
                   />
                 </label>
                 <label>Start Date:
                   <input
                     type="text"
-                    startdate=""
-                    value={testData?.startDate || ""}
+                    name="startDate" // Ensure you provide the correct name attribute here
+                    value={inputs.startDate || ""}
                     onChange={handleChange}
                   />
                 </label>
                 <label>End Date:
                   <input
                     type="text"
-                    enddate=""
-                    value={testData?.endDate || ""}
+                    name="endDate" // Ensure you provide the correct name attribute here
+                    value={inputs.endDate || ""}
                     onChange={handleChange}
                   />
                 </label>
                 <label>Categories
                 </label>
-                <DropdownButton variant= "light" id="dropdown-variants-Info" title="Dropdown button">
+                <DropdownButton variant="light" id="dropdown-variants-Info" title="Dropdown button">
                   <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                   <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                   <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                 </DropdownButton>
-                <label>Category Name:
+                <label>Amount:
                   <input
                     type="text"
-                    name="age"
-                    value={testData?.categoryName || ""}
-                    onChange={handleChange}
-                  />
-                </label>
-                <label>Limit:
-                  <input
-                    type="text"
-                    limit="age"
-                    value={testData?.limit || ""}
+                    name="amount" // Ensure you provide the correct name attribute here
+                    value={inputs.amount || ""}
                     onChange={handleChange}
                   />
                 </label>
