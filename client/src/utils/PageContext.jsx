@@ -45,7 +45,8 @@ export const PageProvider = ({ children }) => {
         "Select", 
         "Edit", 
         "Overviews", 
-        "Profile", 
+        "Profile",
+        "Team", 
         "Error"
     ];
     const pageCheck = validPages.findIndex((page) => {

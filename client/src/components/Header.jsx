@@ -6,7 +6,7 @@ function Header({ header }) {
   return (
     <>
       <div>
-        <h1 className='w100 bg-secondary z-2 ps-2 fw-bold px-md-5 my-0 d-flex flex-wrap align-content-center text-start text-white'>
+        <h1 className='w100 bg-secondary z-2 ps-2 fw-bold px-md-5 my-0 mobile-header d-flex flex-wrap align-content-center text-start text-white'>
           {header}
         </h1>
         <div>

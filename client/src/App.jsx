@@ -16,7 +16,7 @@ function App() {
     return (
       <>
       <ApolloProvider client={client}>
-        <Row className='vw-100 vh-100 m-0 p-0 overflow-hidden'>
+        <Row className='vw-100 vh-100 m-0 p-0 overflow-x-hidden'>
           <PageProvider>
             <Outlet />
           </PageProvider>
