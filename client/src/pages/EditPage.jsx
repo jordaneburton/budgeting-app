@@ -21,8 +21,8 @@ import auth from '../utils/auth';
 
 function EditPage() {
   const { _, setPage } = usePageContext();
-  // const [inputs, setInputs] = useState({});
-  const [selectedBudgetName, setSelectedBudgetName, inputs, setInputs] = useState('');
+  const [inputs, setInputs] = useState({});
+  const [selectedBudgetName, setSelectedBudgetName] = useState('');
   useEffect(() => {
     setPage("Edit");
     window.scrollTo(0, 0);
@@ -95,7 +95,7 @@ function EditPage() {
                 <label>Name:
                   <input
                     type="text"
-                    name="string"
+                    name="text"
                     value={testData?.name || ""}
                     onChange={handleChange}
                   />
