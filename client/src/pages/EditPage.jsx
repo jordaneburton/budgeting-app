@@ -14,8 +14,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
-import { useQuery, useLazyQuery } from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import { QUERY_BUDGET, QUERY_BUDGETS, QUERY_BY_USER } from '../utils/queries';
+import { UPDATE_BUDGET } from '../utils/mutations';
 import auth from '../utils/auth';
 
 
@@ -23,6 +24,7 @@ function EditPage() {
   const { _, setPage } = usePageContext();
   const [inputs, setInputs] = useState('');
   const [selectedBudgetName, setSelectedBudgetName] = useState('');
+  const selectedBudget = '';
   useEffect(() => {
     setPage("Edit");
     window.scrollTo(0, 0);
@@ -35,6 +37,8 @@ function EditPage() {
   const budgets = data?.user.budgets || [];
   console.log(budgets);
 
+  const [updateBudget] = useMutation(UPDATE_BUDGET);
+
   const page = {
     header: "Edit Budgets"
   }
@@ -44,6 +48,7 @@ function EditPage() {
     // Set the selected budget name
     const selectedBudget = budgets.find((budget) => budget._id === selection);
     setSelectedBudgetName(selectedBudget.name);
+    
 
 
 
@@ -59,18 +64,34 @@ function EditPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setInputs(values => ({ ...values, name: value }))
+    setInputs(values => ({ ...values, [name]: value }))
   }
 
 
 
-  const handleSubmit = (event) => {
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   alert(inputs);
+  // }
+
+
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    alert(inputs);
-  }
-
-
-
+    try {
+      await updateBudget({
+        variables: {
+          budgetID: selectedBudget._id,
+          name: selectedBudget.name,
+          startDate: selectedBudget.startDate,
+          endDate: selectedBudget.endDate,
+          amount: selectedBudget.amount
+        }
+      });
+      alert("Budget updated successfully!");
+    } catch (err) {
+      alert("Failed to update budget. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -94,7 +115,7 @@ function EditPage() {
 
             <div className='form-container d-flex flex-wrap flex-column pill-button justify-content-center bg-info w-75 mb-4'>
               {/* <h2 className='fw-semibold'>{budgets[0]?.name?.toUpperCase()}</h2> */}
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleFormSubmit}>
                 <label>Name:
                   <input
                     type="text"
@@ -119,13 +140,6 @@ function EditPage() {
                     onChange={handleChange}
                   />
                 </label>
-                <label>Categories
-                </label>
-                <DropdownButton variant="light" id="dropdown-variants-Info" title="Dropdown button">
-                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </DropdownButton>
                 <label>Amount:
                   <input
                     type="text"
@@ -134,7 +148,10 @@ function EditPage() {
                     onChange={handleChange}
                   />
                 </label>
-                <Button variant="primary">Update</Button>{' '}
+                <Button 
+                variant="primary"
+                onSubmit={handleFormSubmit}
+                >Update</Button>{' '}
                 <input type="submit" />
               </form>
             </div>
