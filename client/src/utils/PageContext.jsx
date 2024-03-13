@@ -13,13 +13,16 @@ export const BudgetContext = createContext();
 
 const BudgetProvider = (props) => {
   const [currentBudget, setCurrentBudget] = useState({
-    name: 'John',
-    role: 'Admin',
-    id: 142323,
+    budgetID: null
   });
 
+  const selectBudget = (budgetID) => {
+    setCurrentBudget({ ...currentBudget, budgetID });
+  };
+
+
   return (
-    <BudgetContext.Provider value={{ currentBudget: currentBudget }} {...props} />
+    <BudgetContext.Provider value={{ currentBudget, selectBudget }} {...props} />
   );
 };
 
