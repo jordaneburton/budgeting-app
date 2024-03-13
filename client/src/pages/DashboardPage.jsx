@@ -12,7 +12,6 @@ import PillButtons from '../components/PillButtons';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_BUDGETS } from '../utils/queries';
 import { QUERY_BY_USER } from '../utils/queries';
-import { QUERY_DASHBOARD } from '../utils/dashboardCalls';
 import auth from '../utils/auth';
 
 function DashboardPage () {
@@ -46,9 +45,11 @@ function DashboardPage () {
 
   const userData = data?.user.budgets
   const currentCategories = budgetData?.categories;
-  // const transactions = categories.map((categ, index) => {
-  //   return {...categ.transactions}
-  // })
+  const transactions = currentCategories?.map((categ, index) => {
+    return {...categ.transactions}
+  })
+
+  tranSum = 
 
   console.log(userData, currentCategories);
 
