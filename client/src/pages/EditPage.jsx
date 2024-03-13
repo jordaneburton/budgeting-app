@@ -21,7 +21,7 @@ import auth from '../utils/auth';
 
 function EditPage() {
   const { _, setPage } = usePageContext();
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState('');
   const [selectedBudgetName, setSelectedBudgetName] = useState('');
   useEffect(() => {
     setPage("Edit");
@@ -31,31 +31,30 @@ function EditPage() {
 
 
   const { loading, error, data } = useQuery(QUERY_BY_USER, { variables: { userId: auth.getProfile().data._id } });
-  const [findbudget, { loading: budgetLoading, data: budgetData }] = useLazyQuery(QUERY_BUDGET)
+  // const [findbudget, { loading: budgetLoading, data: budgetData }] = useLazyQuery(QUERY_BUDGET)
   const budgets = data?.user.budgets || [];
-  console.log(budgets);
+  // console.log(budgets);
 
   const page = {
     header: "Edit Budgets"
   }
 
-  const onClick = async (selection) => {
-    await findbudget({
-      variables: { budgetId: selection }
-    });
+  const onBudgetClick = async (selection) => {
 
     // Set the selected budget name
     const selectedBudget = budgets.find((budget) => budget._id === selection);
     setSelectedBudgetName(selectedBudget.name);
+
+    // Fill form with attributes
+    setInputs(() => ({ [name]: selectedBudget.name, [startdate]: selectedBudget.startDate, [enddate]: selectedBudget.endDate }))
   }
 
 
-  const testData = budgetData?.budget
+  const testData = data?.user.budgets[0] || [];
 
 
   const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const { name, value } = event.target;
     setInputs(values => ({ ...values, [name]: value }))
   }
 
@@ -83,36 +82,36 @@ function EditPage() {
               <div>Loading...</div>
             ) : (
               budgets?.map((category, index) =>
-                <PillButtons key={index} name={category.name} onClick={() => onClick(category._id)} />
+                <PillButtons key={index} name={category.name} onClick={() => onBudgetClick(category._id)} />
               )
             )}
           </Col>
           <Col xs={10} md={8} className='position-relative my-2 z-1 d-flex flex-wrap flex-column align-items-end'>
 
-            <div className='form-container d-flex flex-wrap flex-column pill-button justify-content-center  bg-info w-75 mb-4'>
+            <div className='form-container d-flex flex-wrap flex-column pill-button justify-content-center bg-info w-75 mb-4'>
               {/* <h2 className='fw-semibold'>{budgets[0]?.name?.toUpperCase()}</h2> */}
               <form onSubmit={handleSubmit}>
                 <label>Name:
                   <input
                     type="text"
-                    name="text"
+                    name=""
                     value={testData?.name || ""}
-                    onChange={handleChange}
-                  />
-                </label>
-                <label>Time Frame:
-                  <input
-                    type="text"
-                    timeframe="age"
-                    value={testData?.timeFrame || ""}
                     onChange={handleChange}
                   />
                 </label>
                 <label>Start Date:
                   <input
                     type="text"
-                    startdate="age"
+                    startdate=""
                     value={testData?.startDate || ""}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>End Date:
+                  <input
+                    type="text"
+                    enddate=""
+                    value={testData?.endDate || ""}
                     onChange={handleChange}
                   />
                 </label>
