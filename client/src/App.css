@@ -46,9 +46,6 @@ h1 {
 
 .form-container{
   padding: 400px;
-  margin-bottom: 5px;
-  }
-  .z-1{
-    z-index: 3 !important;
-    padding: 75px;
+  /* margin-top: 20px; */ 
+  margin:auto;
   }

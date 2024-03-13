@@ -64,18 +64,18 @@ await finduser( {
 
   
   // const page = {
-  //   header: "CURRENT_USER_NAME"
+  //   header: "Profile"
   // }
   return (
     <>
     <NavBar />
     <Col xs={12} md={9} className='p-0'>
     <Header header={page.header}/>
-      <h2>
+      {/* <h4>
       Profile
-      </h2>
-      <Row>
-            <Col xs={10} md={8} className='position-relative my-2 z-1 d-flex flex-wrap flex-column align-items-end'>
+      </h4> */}
+      <Row className=''>
+            <Col xs={12}  className='position-relative p-0 z-1 d-flex flex-wrap flex-column align-items-end bg-info overflow-y-scroll'>
               <div className='form-container d-flex flex-wrap flex-column pill-button justify-content-center  bg-info w-75 mb-4'>
                 <h2 className='fw-semibold'>{users[0]?.name?.toUpperCase()}</h2>
                 <form onSubmit={handleSubmit}>
