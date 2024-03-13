@@ -9,6 +9,8 @@ import PieChart from '../components/TransactionPieChart';
 import PillButtons from '../components/PillButtons';
 import auth from '../utils/auth';
 import Row from 'react-bootstrap/esm/Row';
+import NavCanvas from '../components/NavCanvas';
+
 
 // import TransactionLineGraph from '../components/TransactionLineGraph';
 
@@ -61,12 +63,13 @@ function OverviewsPage() {
             )
           )}
         </Col>
-        <Col xs={10} md={8}  className='position-relative my-2 z-1 d-flex flex-wrap flex-column align-items-end'>
-        <h2>Category Budget Distribution</h2>
+        <Col xs={10} md={5}  className='position-relative my-2 z-1 d-flex flex-wrap flex-column align-items-end'>
+        <h4>Category Budget Distribution</h4>
           <PieChart data={categories || []} />
         </Col>
         </Row>
       </Col>
+      <NavCanvas />
     </>
   );
 };
