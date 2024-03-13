@@ -31,7 +31,7 @@ function DeveloperPage () {
                         <div className='row'>
 
                             <div className='col-md-12 text-center position-relative'>
-                                <p className='section-subtitle bg-primary py-2 fs-4 fw-semibold'>Here's who made it all happen:</p>
+                                <p className='section-subtitle py-2 fs-4 fw-semibold'>Here's who made it all happen:</p>
                             </div>
                             <div className='col-sm-6 col-md-4 p-3'>
                                 <div className='team-item'>
