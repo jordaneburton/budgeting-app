@@ -78,7 +78,7 @@ await finduser( {
             <Col xs={12}  className='position-relative p-0 z-1 d-flex flex-wrap flex-column align-items-end bg-info overflow-y-scroll'>
               <div className='form-container d-flex flex-wrap flex-column pill-button justify-content-center  bg-info w-75 mb-4'>
                 <h2 className='fw-semibold'>{users[0]?.name?.toUpperCase()}</h2>
-                <form onSubmit={handleSubmit}>
+                <form style={{marginLeft:"-90px", marginTop:"-500px"}} onSubmit={handleSubmit}>
       <label>Username:
       <input 
         type="text" 
