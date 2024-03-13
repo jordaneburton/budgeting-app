@@ -7,6 +7,29 @@ const PageContext = createContext();
 export const usePageContext = () => useContext(PageContext);
 
 // PageProvider component that holds initial state, returns provider component
+
+
+export const BudgetContext = createContext();
+
+const BudgetProvider = (props) => {
+  const [currentBudget, setCurrentBudget] = useState({
+    budgetID: null
+  });
+
+  const selectBudget = (budgetID) => {
+    setCurrentBudget({ ...currentBudget, budgetID });
+  };
+
+
+  return (
+    <BudgetContext.Provider value={{ currentBudget, selectBudget }} {...props} />
+  );
+};
+
+
+
+
+
 export const PageProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(
       {
@@ -43,3 +66,5 @@ export const PageProvider = ({ children }) => {
     </PageContext.Provider>
   );
 };
+
+export default BudgetProvider;
