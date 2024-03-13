@@ -16,6 +16,7 @@ import auth from '../utils/auth';
 
 function DashboardPage () {
   const { _, setPage } = usePageContext();
+  const [ transactionSum, setSum ] = useState(0);
 
   // const { loading, data } = useQuery(QUERY_BUDGETS);
   // const budgets = data?.budgets || [];
@@ -37,6 +38,11 @@ function DashboardPage () {
     // setBudget(budgets[0]);
   }, []);
   
+  useEffect(() => {
+    setSum(transactions?.reduce((total, num) => {
+      return total + num.amount;
+    }, 0));
+  }, [currentBudget, data])
 
   // make sure to import budget from selected budget
   const page = {
@@ -49,9 +55,10 @@ function DashboardPage () {
     return {...categ.transactions}
   })
 
-  tranSum = 
+  
+  
 
-  console.log(userData, currentCategories);
+  console.log(userData, currentCategories, transactions, transactionSum);
 
   const testData = [{
       name: 'food'
