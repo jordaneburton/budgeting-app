@@ -41,10 +41,10 @@ h1 {
 }
 
 .form-container{
-padding: 300px;
-margin-top: 50px;
-}
-.z-1{
-  z-index: 1 !important;
-  padding: 50px;
-}
+  padding: 400px;
+  margin-top: 20px;
+  }
+  .z-1{
+    z-index: 1 !important;
+    padding: 50px;
+  }
