@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import Spinner from 'react-bootstrap/Spinner';
 
-
 import NavBar from '../components/NavBar';
 import NavCanvas from '../components/NavCanvas';
 import Header from '../components/Header';
@@ -12,26 +11,26 @@ import PillButtons from '../components/PillButtons';
 
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_BUDGETS } from '../utils/queries';
+import { QUERY_BY_USER } from '../utils/queries';
 import { QUERY_DASHBOARD } from '../utils/dashboardCalls';
+import auth from '../utils/auth';
 
 function DashboardPage () {
   const { _, setPage } = usePageContext();
-  const { useBudget, setBudget} = useState();
 
+  // const { loading, data } = useQuery(QUERY_BUDGETS);
+  // const budgets = data?.budgets || [];
 
-  const { loading, data } = useQuery(QUERY_BUDGETS);
-  const budgets = data?.budgets || [];
+  const { loading, error, data } = useQuery(QUERY_BY_USER, { variables: { userId: auth.getProfile().data._id } });
 
-
-
-  // const { loading, data } = useQuery(QUERY_BUDGETS, {
-  //   headers: {
-  //     Authorization: token ? `Bearer ${token}` : "",
-  //   },
-  //   variables: {"budgetId": "65f097b4e3667d4a060ef33e"}
-  // });
-  // const categories = data?.budgets[0].categories || [];
-  // console.log(categories);
+  const [currentBudget, setCurrentBudget] = useState(data?.user.budgets[0]?.name || "")
+  const [budgetData, setBudgetData] = useState(data?.user.budgets[0] || {})
+  useEffect(() => {
+    console.log(data)
+    if (!currentBudget) { setCurrentBudget(data?.user.budgets[0]?.name) }
+    console.log(currentBudget)
+    setBudgetData(data?.user.budgets.find((item) => item.name === currentBudget))
+  }, [currentBudget,data]);
   
   useEffect(() => {
     setPage("Dashboard");
@@ -42,8 +41,16 @@ function DashboardPage () {
 
   // make sure to import budget from selected budget
   const page = {
-    header: "CURRENT_BUDGET_NAME"
+    header: currentBudget
   }
+
+  const userData = data?.user.budgets
+  const currentCategories = budgetData?.categories;
+  // const transactions = categories.map((categ, index) => {
+  //   return {...categ.transactions}
+  // })
+
+  console.log(userData, currentCategories);
 
   const testData = [{
       name: 'food'
@@ -58,7 +65,16 @@ function DashboardPage () {
       name: 'savings'
     },
   ]
-
+  
+  if (error) return (
+    <>
+      <NavBar />
+      <Col xs={12} md={9} className='p-0 position-relative'>
+        <Header header={page.header}/>
+        <div className='bg-primary primary-bar d-none d-md-block position-absolute z-0 w-100'>Error: {error.message}</div>
+      </Col>
+    </>
+  );
   return (
     <>
     <NavBar />
@@ -75,10 +91,10 @@ function DashboardPage () {
       <Row className='m-0'>
         <Col xs={10} md={4} className='position-relative p-0 my-2 z-1'>
           {loading ? (
-              <div></div>
+              <div className='d-flex flex-wrap w-100 justify-content-center my-5'><Spinner animation="border" variant="primary" /></div>
             ) : (
-              testData.map((category, index) => 
-                <PillButtons key={index} name={category.name}/>
+              currentCategories?.map((categ, index) => 
+                <PillButtons key={index} name={categ.name} onClick={() => console.log('onclick function')}/>
               )
             )}
         </Col>
