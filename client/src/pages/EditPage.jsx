@@ -97,7 +97,7 @@ function EditPage() {
     <>
       <NavBar />
       <Col xs={6} md={9} className='p-0' style={{ backgroundColor: "#FF5666", height: '12%', border: "2px solid white", }}>
-        {/* <Header header={page.header}/> */}
+        <Header header={page.header}/>
         <h2>
           {selectedBudgetName}
         </h2>
