@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { usePageContext } from '../utils/PageContext';
+import { usePageContext, useBudgetContext } from '../utils/PageContext';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import Spinner from 'react-bootstrap/Spinner';
@@ -11,12 +11,14 @@ import PillButtons from '../components/PillButtons';
 import TransactionBar from '../components/TransactionBar';
 
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_BUDGETS } from '../utils/queries';
+import { QUERY_BUDGET } from '../utils/queries';
 import { QUERY_BY_USER } from '../utils/queries';
 import auth from '../utils/auth';
 
 function DashboardPage () {
   const { _, setPage } = usePageContext();
+  const { currentBudgetID, setBudgetID} = useBudgetContext();
+
   const [ transactionSum, setSum ] = useState(0);
   const [ categoryLimit, setLimit ] = useState(0);
   const [ transactions, setTransactions ] = useState([]);
@@ -140,8 +142,15 @@ function DashboardPage () {
         ? (
           <div className='d-flex flex-wrap flex-column w-100 align-content-end'>
               {transactions?.map((transac, index) => {
-                <PillButtons key={index} name={transac.name} />
-                // <TransactionBar key={index} description={transac.description} onClick={() => {console.log('Clicked a transaction')}}/>
+                return (
+                  <>
+                  {/* // <PillButtons key={index} name={transac.name} />
+                  <div>
+                    <p>Description: {transac.description} | ${transac.amount}</p>
+                  </div> */}
+                    <TransactionBar key={index} description={transac.description} onClick={() => {console.log('Clicked a transaction')}}/>
+                  </>
+                )
               })}
           </div>
           )

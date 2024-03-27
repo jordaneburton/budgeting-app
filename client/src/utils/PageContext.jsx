@@ -8,24 +8,10 @@ export const usePageContext = () => useContext(PageContext);
 
 // PageProvider component that holds initial state, returns provider component
 
+// Budget Context for selecting budgets
 
-export const BudgetContext = createContext();
-
-const BudgetProvider = (props) => {
-  const [currentBudget, setCurrentBudget] = useState({
-    budgetID: null
-  });
-
-  const selectBudget = (budgetID) => {
-    setCurrentBudget({ ...currentBudget, budgetID });
-  };
-
-
-  return (
-    <BudgetContext.Provider value={{ currentBudget, selectBudget }} {...props} />
-  );
-};
-
+const BudgetContext = createContext();
+export const useBudgetContext = () => useContext(BudgetContext);
 
 
 
@@ -68,4 +54,19 @@ export const PageProvider = ({ children }) => {
   );
 };
 
-export default BudgetProvider;
+export const BudgetProvider = (props) => {
+  const [currentBudget, setCurrentBudget] = useState({
+    budgetID: null
+  });
+
+  const selectBudget = (budgetID) => {
+    setCurrentBudget({ budgetID });
+  };
+
+
+  return (
+    <BudgetContext.Provider value={{ currentBudget, selectBudget }} >
+      {...props}
+    </BudgetContext.Provider>
+  );
+};
