@@ -19,6 +19,19 @@ export const QUERY_USERS = gql`
   }
 `;
 
+export const QUERY_USER_BUDGETS = gql`
+  query userBudgets($userId: ID) {
+    user(userID: $userId) {
+      username
+      email
+      budgets {
+        _id
+        name
+        amount
+      }
+    }
+  }
+`
 
 export const QUERY_BUDGETS = gql`
   query allBudgets {
