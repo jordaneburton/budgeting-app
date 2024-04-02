@@ -22,7 +22,10 @@ export const PageProvider = ({ children }) => {
         title: "Dashboard"
       }
   );
-
+  const [currentBudget, setCurrentBudget] = useState({
+    budgetID: null
+  });
+  
   // Function to update page state
   const setPage = (pageTitle) => {
     // Check if pageTitle matches valid page titles
@@ -44,29 +47,16 @@ export const PageProvider = ({ children }) => {
     // Update state with the students array with the newStudent
     setCurrentPage({ title: pageTitle });
   };
-
-  // Provider components expect a value prop to be passed
-  return (
-    <PageContext.Provider value={{ currentPage, setPage }}>
-      {/* Render children passed from props */}
-      {children}
-    </PageContext.Provider>
-  );
-};
-
-export const BudgetProvider = (props) => {
-  const [currentBudget, setCurrentBudget] = useState({
-    budgetID: null
-  });
-
+  // Function for selecting budget via ID
   const selectBudget = (budgetID) => {
     setCurrentBudget({ budgetID });
   };
 
-
+  // Provider components expect a value prop to be passed
   return (
-    <BudgetContext.Provider value={{ currentBudget, selectBudget }} >
-      {...props}
-    </BudgetContext.Provider>
+    <PageContext.Provider value={{ currentPage, currentBudget, setPage, selectBudget }}>
+      {/* Render children passed from props */}
+      {children}
+    </PageContext.Provider>
   );
 };

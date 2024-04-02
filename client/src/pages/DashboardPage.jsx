@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { usePageContext, useBudgetContext } from '../utils/PageContext';
+import { usePageContext } from '../utils/PageContext';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import Spinner from 'react-bootstrap/Spinner';
@@ -16,8 +16,7 @@ import { QUERY_BY_USER } from '../utils/queries';
 import auth from '../utils/auth';
 
 function DashboardPage () {
-  const { _, setPage } = usePageContext();
-  const { currentBudgetID, setBudgetID} = useBudgetContext();
+  const { _, currentBudgetID, setPage, selectBudget } = usePageContext();
 
   const [ transactionSum, setSum ] = useState(0);
   const [ categoryLimit, setLimit ] = useState(0);
