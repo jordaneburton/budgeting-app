@@ -71,7 +71,7 @@ function DashboardPage () {
     if (!transactions) setTransactions(budgetData?.categories.map((transac, index) => {
       return {...transac};
     }));
-  }, [])
+  }, [currentSelects])
 
   // make sure to import budget from selected budget
   const page = {
@@ -124,6 +124,23 @@ function DashboardPage () {
               }
               {
                 currentSelects?.map((selects) => {
+                  if (selects.transactions) return (
+                    <PillButtons key={selects.name} name={selects.name} onClick={() => {
+                      if (selects.transactions) { 
+                        console.log("Selected Category")
+                        setCurrentCategory(selects.name);
+                        setTransactions(selects.transactions || []) 
+                      }
+                      console.log("Current Selects:");
+                      console.log(currentSelects);
+                      setTransactions(selects.transactions);
+                      console.log("Current Transactions: ");
+                      console.log(transactions);
+                      // Update transactions on the side
+                    }}
+                    />
+                  )
+
                   if (selects.categories) return (
                     <PillButtons key={selects.name} name={selects.name} onClick={() => {
                       setViewCateg(true);
@@ -137,23 +154,16 @@ function DashboardPage () {
                     }}
                     />
                   )
-
-                  if (selects.transactions) return (
-                    <PillButtons key={selects.name} name={selects.name} onClick={() => {
-                      if (selects.transactions) { 
-                        console.log("Selected Category")
-                        setCurrentCategory(selects.name);
-                        setTransactions(selects.transactions || []) 
-                      }
-                      console.log("Current Selects:");
-                      console.log(currentSelects);
-                    }}
-                    />
-                  )
                 })
               }
             </Col>
-        
+            {/* Create Col for transactions,
+              either return empty if transactions haven't been set, OR
+              return transactions in *almost* pill button format
+
+              *** code for transaction formatting should be in a MS sticky note ***
+
+            */}
           </Row>
       }
     </Col>
