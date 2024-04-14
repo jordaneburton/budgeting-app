@@ -172,7 +172,7 @@ function DashboardPage () {
               *** code for transaction formatting should be in a MS sticky note ***
 
             */}
-            {transactions?.map((transac) => {
+            {currentSelects?.transactions?.map((transac) => {
                 if (transac.description) return (
                   <TransactionBar key={transac.index} description={transac.description}></TransactionBar>
                 )}
