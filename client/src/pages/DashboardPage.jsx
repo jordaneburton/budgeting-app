@@ -42,35 +42,43 @@ function DashboardPage () {
     }
   }, [])
 
+  // Updates budget state variable only if budget is empty
   useEffect(() => {
     // console.log(data)
     if (!currentBudget) { setCurrentBudget(data?.user.budgets[0]?.name) }
   }, [currentBudget]);
 
+  // Update category state variable only if category is empty
   useEffect(() => {
     // console.log(data)
     if (!currentCategory) { setCurrentCategory(data?.user.budgets[0]?.categories[0]) }
   }, [currentCategory]);
   
+  // scrolls to top of page on load
   useEffect(() => {
     setPage("Dashboard");
     window.scrollTo(0, 0);
   }, []);
   
+  // updates the total sum of the current transactions
   useEffect(() => {
     setSum(transactions?.reduce((total, num) => {
       return total + num.amount;
     }, 0));
   }, [currentBudget, data])
 
+  // updates budget data limit amount
   useEffect(() => {
     if (!budgetData) { setLimit(data?.user.budgets[0]?.categories[0]?.budgetAmount) }
   }, [currentBudget, data])
 
+  // updates our transactions state variable IF ITS EMPTY
   useEffect(() => {
-    if (!transactions) setTransactions(budgetData?.categories.map((transac, index) => {
-      return {...transac};
-    }));
+    if (!transactions) { 
+      setTransactions(budgetData?.categories.map((transac, index) => {
+        return {...transac};
+      }))
+    };
   }, [currentSelects])
 
   // make sure to import budget from selected budget
@@ -164,6 +172,12 @@ function DashboardPage () {
               *** code for transaction formatting should be in a MS sticky note ***
 
             */}
+            {transactions?.map((transac) => {
+                if (transac.description) return (
+                  <TransactionBar key={transac.index} description={transac.description}></TransactionBar>
+                )}
+              )
+            } 
           </Row>
       }
     </Col>
