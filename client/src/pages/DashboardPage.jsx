@@ -91,9 +91,6 @@ function DashboardPage () {
   const currentTransactions = currentCategories?.map((categ, index) => {
     return {...categ.transactions}
   })
-
-  // console.log(transactions);
-  // console.log('Heres the category: ' + currentCategory.name);
   
   if (error) return (
     <>
@@ -135,16 +132,11 @@ function DashboardPage () {
                   if (selects.transactions) return (
                     <PillButtons key={selects.name} name={selects.name} onClick={() => {
                       if (selects.transactions) { 
-                        // console.log("Selected Category")
                         setCurrentCategory(selects.name);
                         setTransactions(selects.transactions || []) 
                       }
-                      // console.log("Current Selects:");
-                      console.log(currentSelects);
+                      // Update transactions state
                       setTransactions(selects.transactions);
-                      // console.log("Current Transactions: ");
-                      console.log(transactions);
-                      // Update transactions on the side
                     }}
                     />
                   )
@@ -153,29 +145,19 @@ function DashboardPage () {
                     <PillButtons key={selects.name} name={selects.name} onClick={() => {
                       setViewCateg(true);
                       if (selects.categories) {
-                        // console.log("Selected Budget")
                         setCurrentBudget(selects.name);
                         setSelects(selects.categories);
                       }
-                      // console.log("Current Selects:");
-                      console.log(currentSelects);
                     }}
                     />
                   )
                 })
               }
             </Col >
-            {/* Create Col for transactions,
-              either return empty if transactions haven't been set, OR
-              return transactions in *almost* pill button format
-
-              *** code for transaction formatting should be in a MS sticky note ***
-
-            */}
+            {/* Show transactions on side based on selected category */}
             <Col xs={12} md={8} className='position-relative d-flex justify-content-end p-0 my-2 z-1'>
               {transactions.map((transac) => {
                   if (transac.description) {
-                    console.log("update transactions")
                     return (
                       <TransactionBar key={transac.description} description={transac.description} cost={transac.amount}></TransactionBar>
                     )
