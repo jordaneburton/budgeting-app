@@ -41,11 +41,11 @@ h1 {
   /* min-width: 16rem;
   max-width: 20rem; */
   /* z-index: 2; */
-  height: 6rem;
+  height: 5rem;
 }
 
 .transaction-bar {
-  width: 60%;
+  width: 80%;
 }
 
 .form-container{
