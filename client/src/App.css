@@ -36,12 +36,16 @@ h1 {
   background-color: white;
 }
 
-/* PILL BUTTONS */
+/* PILL SHAPED COMPONENTS */
 .pill-button {
   /* min-width: 16rem;
   max-width: 20rem; */
   /* z-index: 2; */
-  height: 6rem;
+  height: 5rem;
+}
+
+.transaction-bar {
+  width: 80%;
 }
 
 .form-container{

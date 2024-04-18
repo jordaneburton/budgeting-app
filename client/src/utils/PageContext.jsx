@@ -8,24 +8,10 @@ export const usePageContext = () => useContext(PageContext);
 
 // PageProvider component that holds initial state, returns provider component
 
+// Budget Context for selecting budgets
 
-export const BudgetContext = createContext();
-
-const BudgetProvider = (props) => {
-  const [currentBudget, setCurrentBudget] = useState({
-    budgetID: null
-  });
-
-  const selectBudget = (budgetID) => {
-    setCurrentBudget({ ...currentBudget, budgetID });
-  };
-
-
-  return (
-    <BudgetContext.Provider value={{ currentBudget, selectBudget }} {...props} />
-  );
-};
-
+const BudgetContext = createContext();
+export const useBudgetContext = () => useContext(BudgetContext);
 
 
 
@@ -36,7 +22,10 @@ export const PageProvider = ({ children }) => {
         title: "Dashboard"
       }
   );
-
+  const [currentBudget, setCurrentBudget] = useState({
+    budgetID: null
+  });
+  
   // Function to update page state
   const setPage = (pageTitle) => {
     // Check if pageTitle matches valid page titles
@@ -58,14 +47,16 @@ export const PageProvider = ({ children }) => {
     // Update state with the students array with the newStudent
     setCurrentPage({ title: pageTitle });
   };
+  // Function for selecting budget via ID
+  const selectBudget = (budgetID) => {
+    setCurrentBudget({ budgetID });
+  };
 
   // Provider components expect a value prop to be passed
   return (
-    <PageContext.Provider value={{ currentPage, setPage }}>
+    <PageContext.Provider value={{ currentPage, currentBudget, setPage, selectBudget }}>
       {/* Render children passed from props */}
       {children}
     </PageContext.Provider>
   );
 };
-
-export default BudgetProvider;
